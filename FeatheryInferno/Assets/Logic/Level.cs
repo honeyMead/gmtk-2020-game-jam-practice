@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace Assets.Logic
 {
@@ -32,24 +30,18 @@ namespace Assets.Logic
         /// <returns>If player has moved.</returns>
         public bool Next(Position direction)
         {
-            var hasPlayerMoved = false;
-
-            var target = new Position(player.Position.X + direction.X, player.Position.Y + direction.Y);
-            if (IsInsideBounds(target))
-            {
-                var entityAtTarget = GetEntity(target.X, target.Y);
-
-                if (entityAtTarget == null)
-                {
-                    SetEntity(player.Position.X, player.Position.Y, null);
-                    player.Position = target;
-                    SetEntity(target.X, target.Y, player);
-                    hasPlayerMoved = true;
-                }
-            }
+            var hasPlayerMoved = MovePlayer(direction);
 
             // TODO remove burned down stuff
 
+            InflameEntities();
+
+            // TODO move normal chickens
+            return hasPlayerMoved;
+        }
+
+        private void InflameEntities()
+        {
             var entitiesToInflame = new List<GameEntity>();
             foreach (var entity in allEntities)
             {
@@ -65,8 +57,24 @@ namespace Assets.Logic
                 }
             }
             entitiesToInflame.ForEach(a => a.IsBurning = true);
+        }
 
-            // TODO move normal chickens
+        private bool MovePlayer(Position direction)
+        {
+            var hasPlayerMoved = false;
+            var target = new Position(player.Position.X + direction.X, player.Position.Y + direction.Y);
+            if (IsInsideBounds(target))
+            {
+                var entityAtTarget = GetEntity(target.X, target.Y);
+
+                if (entityAtTarget == null)
+                {
+                    SetEntity(player.Position.X, player.Position.Y, null);
+                    player.Position = target;
+                    SetEntity(target.X, target.Y, player);
+                    hasPlayerMoved = true;
+                }
+            }
             return hasPlayerMoved;
         }
 

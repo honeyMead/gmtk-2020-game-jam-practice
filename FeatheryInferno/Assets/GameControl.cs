@@ -39,6 +39,38 @@ public class GameControl : MonoBehaviour
     void Update()
     {
         // TODO ensure that previous "level.Next" is done
+        var hasMoved = DoNextStep();
+
+        if (hasMoved)
+        {
+            for (int x = 0; x < level.xSize; x++)
+            {
+                for (int y = 0; y < level.ySize; y++)
+                {
+                    var entity = level.GetEntity(x, y);
+
+                    if (entity != null)
+                    {
+                        entityMapping.TryGetValue(entity, out GameObject unityObject);
+
+                        if (entity.IsBurning && unityObject != player)
+                        {
+                            ShowFlames(entity);
+                        }
+
+                        if (entity.Name == Level.PlayerName)
+                        {
+                            MovePlayer(entity);
+                        }
+                    }
+                }
+            }
+            level.PrintTiles();
+        }
+    }
+
+    private bool DoNextStep()
+    {
         var up = Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow);
         var left = Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow);
         var down = Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow);
@@ -62,43 +94,28 @@ public class GameControl : MonoBehaviour
             hasMoved = level.Next(new Position(1, 0));
         }
 
-        if (hasMoved)
+        return hasMoved;
+    }
+
+    private void MovePlayer(GameEntity entity)
+    {
+        var newX = ConvertIndexToTransformPosition(entity.Position.X);
+        var newY = ConvertIndexToTransformPosition(entity.Position.Y);
+        player.transform.position = new Vector2(newX, newY); // TODO animate movement
+    }
+
+    private void ShowFlames(GameEntity entity)
+    {
+        var position = new Vector3
         {
-            for (int x = 0; x < level.xSize; x++)
-            {
-                for (int y = 0; y < level.ySize; y++)
-                {
-                    var entity = level.GetEntity(x, y);
-
-                    if (entity != null)
-                    {
-                        entityMapping.TryGetValue(entity, out GameObject unityObject);
-
-                        if (entity.IsBurning && unityObject != player)
-                        {
-                            var position = new Vector3
-                            {
-                                x = ConvertIndexToTransformPosition(entity.Position.X),
-                                y = ConvertIndexToTransformPosition(entity.Position.Y)
-                            };
-                            var hasFireYet = fires.Any(f => f.transform.position == position);
-                            if (!hasFireYet)
-                            {
-                                var newUnityObject = Instantiate(firePrefab, position, Quaternion.identity);
-                                fires.Add(newUnityObject);
-                            }
-                        }
-
-                        if (entity.Name == Level.PlayerName)
-                        {
-                            var newX = ConvertIndexToTransformPosition(entity.Position.X);
-                            var newY = ConvertIndexToTransformPosition(entity.Position.Y);
-                            unityObject.transform.position = new Vector2(newX, newY); // TODO animate movement
-                        }
-                    }
-                }
-            }
-            level.PrintTiles();
+            x = ConvertIndexToTransformPosition(entity.Position.X),
+            y = ConvertIndexToTransformPosition(entity.Position.Y)
+        };
+        var hasFireYet = fires.Any(f => f.transform.position == position);
+        if (!hasFireYet)
+        {
+            var newUnityObject = Instantiate(firePrefab, position, Quaternion.identity);
+            fires.Add(newUnityObject);
         }
     }
 

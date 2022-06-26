@@ -4,6 +4,8 @@
     {
         public string Name { get; set; }
         public Position Position { get; set; } = new Position();
+        public bool IsFlammable { get; set; } = false;
+        public bool IsBurning { get; set; } = false;
 
         public override string ToString()
         {

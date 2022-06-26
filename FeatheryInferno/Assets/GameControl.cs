@@ -1,6 +1,6 @@
 using Assets.Logic;
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GameControl : MonoBehaviour
@@ -8,10 +8,12 @@ public class GameControl : MonoBehaviour
     public int TileSize;
     public int HorizontalTiles;
     public int VerticalTiles;
+    public GameObject firePrefab;
 
     private GameObject player;
     private GameObject[] chicken;
     private GameObject[] strawBales;
+    private IList<GameObject> fires;
     private GameObject exit;
     private Level level;
 
@@ -22,6 +24,7 @@ public class GameControl : MonoBehaviour
         player = GameObject.FindWithTag(Level.PlayerName);
         chicken = GameObject.FindGameObjectsWithTag(Level.ChickenName);
         strawBales = GameObject.FindGameObjectsWithTag(Level.StrawBaleName);
+        fires = new List<GameObject>();
         exit = GameObject.FindWithTag(Level.ExitName);
 
         level = new Level(HorizontalTiles, VerticalTiles);
@@ -61,16 +64,38 @@ public class GameControl : MonoBehaviour
 
         if (hasMoved)
         {
-            foreach (var m in entityMapping)
+            for (int x = 0; x < level.xSize; x++)
             {
-                var entity = m.Key;
-                var unityObject = m.Value;
-
-                if (entity.Name == Level.PlayerName)
+                for (int y = 0; y < level.ySize; y++)
                 {
-                    var newX = ConvertIndexToTransformPosition(entity.Position.X);
-                    var newY = ConvertIndexToTransformPosition(entity.Position.Y);
-                    unityObject.transform.position = new Vector2(newX, newY); // TODO animate movement
+                    var entity = level.GetEntity(x, y);
+
+                    if (entity != null)
+                    {
+                        entityMapping.TryGetValue(entity, out GameObject unityObject);
+
+                        if (entity.IsBurning && unityObject != player)
+                        {
+                            var position = new Vector3
+                            {
+                                x = ConvertIndexToTransformPosition(entity.Position.X),
+                                y = ConvertIndexToTransformPosition(entity.Position.Y)
+                            };
+                            var hasFireYet = fires.Any(f => f.transform.position == position);
+                            if (!hasFireYet)
+                            {
+                                var newUnityObject = Instantiate(firePrefab, position, Quaternion.identity);
+                                fires.Add(newUnityObject);
+                            }
+                        }
+
+                        if (entity.Name == Level.PlayerName)
+                        {
+                            var newX = ConvertIndexToTransformPosition(entity.Position.X);
+                            var newY = ConvertIndexToTransformPosition(entity.Position.Y);
+                            unityObject.transform.position = new Vector2(newX, newY); // TODO animate movement
+                        }
+                    }
                 }
             }
             level.PrintTiles();
@@ -84,6 +109,14 @@ public class GameControl : MonoBehaviour
             int xIndex = ConvertTransformPositionToIndex(unityObject.transform.position.x);
             int yIndex = ConvertTransformPositionToIndex(unityObject.transform.position.y);
             var gameEntity = new GameEntity() { Name = unityObject.tag };
+            if (gameEntity.Name == Level.PlayerName)
+            {
+                gameEntity.IsBurning = true;
+            }
+            if (gameEntity.Name == Level.StrawBaleName)
+            {
+                gameEntity.IsFlammable = true;
+            }
             level.PlaceEntity(xIndex, yIndex, gameEntity);
             entityMapping.Add(gameEntity, unityObject);
         }

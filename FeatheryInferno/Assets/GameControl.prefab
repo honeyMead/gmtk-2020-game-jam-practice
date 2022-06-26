@@ -47,3 +47,4 @@ MonoBehaviour:
   TileSize: 2
   HorizontalTiles: 8
   VerticalTiles: 5
+  firePrefab: {fileID: 7782850036427856027, guid: b5ceff0ebd2333a4391d517830b84147, type: 3}

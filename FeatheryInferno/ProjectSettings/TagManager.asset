@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Chicken
   - Tile
+  - StrawBale
+  - Exit
   layers:
   - Default
   - TransparentFX

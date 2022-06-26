@@ -2,5 +2,12 @@
 {
     internal class GameEntity
     {
+        public string Name { get; set; }
+        public Position Position { get; set; } = new Position();
+
+        public override string ToString()
+        {
+            return Name.Substring(0, 1);
+        }
     }
 }

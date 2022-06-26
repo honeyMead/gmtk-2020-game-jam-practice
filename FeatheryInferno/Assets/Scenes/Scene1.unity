@@ -123,6 +123,589 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &236212470
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007064, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_Name
+      value: StrawBale (6)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+--- !u!1001 &291367029
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_RootOrder
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007064, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_Name
+      value: StrawBale (9)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+--- !u!1001 &311877978
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007064, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_Name
+      value: StrawBale (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+--- !u!1001 &627882250
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007064, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_Name
+      value: StrawBale (4)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+--- !u!1001 &812735436
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_RootOrder
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007064, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_Name
+      value: StrawBale (11)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+--- !u!1001 &830645220
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007064, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_Name
+      value: StrawBale (3)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+--- !u!1001 &834449023
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007064, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_Name
+      value: StrawBale (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+--- !u!1001 &1020346754
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_RootOrder
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007064, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_Name
+      value: StrawBale (7)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+--- !u!1001 &1037318066
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_RootOrder
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007064, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_Name
+      value: StrawBale (10)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+--- !u!1001 &1262014713
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_RootOrder
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007064, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_Name
+      value: StrawBale (8)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+--- !u!1001 &1685087226
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007064, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_Name
+      value: StrawBale (5)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
 --- !u!1001 &1954432747456288126
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -408,6 +991,59 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 353e8364a775db54080276b082a0646e, type: 3}
+--- !u!1001 &5972902818441973023
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007063, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972902818945007064, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
+      propertyPath: m_Name
+      value: StrawBale
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6893da9dfbbcdd94f84de77019cbe0fc, type: 3}
 --- !u!1001 &7496369712663690630
 PrefabInstance:
   m_ObjectHideFlags: 0

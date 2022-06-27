@@ -66,15 +66,20 @@ namespace Assets.Logic
 
                 if (burningNeighbors.Any() && emptyNeighbors.Any())
                 {
-                    MoveEntityToPosition(chick, emptyNeighbors.First().Position); // TODO remove
-                    //foreach (var emptyNeighbor in emptyNeighbors)
-                    //{
-                    //    // TODO get neighbors, prevent when one burns
-                    //}
-                    // TODO when no GOOD neighbor was found --> move to random one
+                    var bestPosition = emptyNeighbors.First().Position;
+
+                    foreach (var emptyNeighbor in emptyNeighbors)
+                    {
+                        var nextNeighbors = GetNeighborEntities(emptyNeighbor);
+                        var hasNoBurningNeighbors = nextNeighbors.All(n => !n.IsBurning);
+                        if (hasNoBurningNeighbors)
+                        {
+                            bestPosition = emptyNeighbor.Position;
+                            break;
+                        }
+                    }
+                    MoveEntityToPosition(chick, bestPosition);
                 }
-                // TODO move away from direct neighbor fire to empty positions
-                // TODO try not to move next to fire
             }
         }
 

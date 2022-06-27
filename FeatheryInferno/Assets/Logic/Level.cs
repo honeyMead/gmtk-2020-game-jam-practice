@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace Assets.Logic
 {
@@ -8,6 +9,7 @@ namespace Assets.Logic
         public const string PlayerName = "Player";
         public const string ChickenName = "Chicken";
         public const string StrawBaleName = "StrawBale";
+        public const string EmptyName = "_Empty";
         public const string ExitName = "Exit";
 
         public readonly int xSize;
@@ -15,29 +17,65 @@ namespace Assets.Logic
 
         private readonly GameEntity[,] Tiles;
         private GameEntity player;
-        private IList<GameEntity> chicken = new List<GameEntity>();
-        private IList<GameEntity> strawBales = new List<GameEntity>();
+        private readonly IList<GameEntity> chicken = new List<GameEntity>();
+        private readonly IList<GameEntity> strawBales = new List<GameEntity>();
         private GameEntity exit;
-        private IList<GameEntity> allEntities = new List<GameEntity>();
+        private readonly IList<GameEntity> allEntities = new List<GameEntity>();
 
         public Level(int horizontalTiles, int verticalTiles)
         {
             xSize = horizontalTiles;
             ySize = verticalTiles;
             Tiles = new GameEntity[horizontalTiles, verticalTiles];
+            InitEmptySpace();
+        }
+
+        private void InitEmptySpace()
+        {
+            for (int x = 0; x < xSize; x++)
+            {
+                for (int y = 0; y < ySize; y++)
+                {
+                    SetEmptyAtPosition(x, y);
+                }
+            }
         }
 
         /// <returns>If player has moved.</returns>
         public bool Next(Position direction)
         {
             var hasPlayerMoved = MovePlayer(direction);
-
-            // TODO remove burned down stuff
-
-            InflameEntities();
-
-            // TODO move normal chickens
+            if (hasPlayerMoved)
+            {
+                // TODO check if game won: all chickens saved and exit reached
+                InflameEntities();
+                MoveChicken();
+                // TODO remove burned down stuff
+                // TODO check if game lost: a chicken burned
+            }
             return hasPlayerMoved;
+        }
+
+        private void MoveChicken()
+        {
+            foreach (var chick in chicken)
+            {
+                var neighbors = GetNeighborEntities(chick);
+                var emptyNeighbors = neighbors.Where(n => n.IsEmpty());
+                var burningNeighbors = neighbors.Where(n => n.IsBurning);
+
+                if (burningNeighbors.Any() && emptyNeighbors.Any())
+                {
+                    MoveEntityToPosition(chick, emptyNeighbors.First().Position); // TODO remove
+                    //foreach (var emptyNeighbor in emptyNeighbors)
+                    //{
+                    //    // TODO get neighbors, prevent when one burns
+                    //}
+                    // TODO when no GOOD neighbor was found --> move to random one
+                }
+                // TODO move away from direct neighbor fire to empty positions
+                // TODO try not to move next to fire
+            }
         }
 
         private void InflameEntities()
@@ -67,11 +105,9 @@ namespace Assets.Logic
             {
                 var entityAtTarget = GetEntity(target.X, target.Y);
 
-                if (entityAtTarget == null)
+                if (entityAtTarget.IsEmpty())
                 {
-                    SetEntity(player.Position.X, player.Position.Y, null);
-                    player.Position = target;
-                    SetEntity(target.X, target.Y, player);
+                    MoveEntityToPosition(player, target);
                     hasPlayerMoved = true;
                 }
             }
@@ -109,6 +145,13 @@ namespace Assets.Logic
             SetEntity(xIndex, yIndex, gameEntity);
         }
 
+        private void MoveEntityToPosition(GameEntity entity, Position target)
+        {
+            SetEmptyAtPosition(entity.Position.X, entity.Position.Y);
+            entity.Position = target;
+            SetEntity(target.X, target.Y, entity);
+        }
+
         private IList<GameEntity> GetNeighborEntities(GameEntity originEntity)
         {
             var neighborEntities = new List<GameEntity>();
@@ -127,10 +170,7 @@ namespace Assets.Logic
                 if (IsInsideBounds(neighborPosition))
                 {
                     var neighbor = GetEntity(neighborPosition.X, neighborPosition.Y);
-                    if (neighbor != null)
-                    {
-                        neighborEntities.Add(neighbor);
-                    }
+                    neighborEntities.Add(neighbor);
                 }
             }
             return neighborEntities;
@@ -147,20 +187,28 @@ namespace Assets.Logic
                 && target.X <= Tiles.GetUpperBound(0) && target.Y <= Tiles.GetUpperBound(1);
         }
 
+        private void SetEmptyAtPosition(int x, int y)
+        {
+            SetEntity(x, y, new GameEntity()
+            {
+                Name = EmptyName,
+                Position = new Position(x, y),
+            });
+        }
+
         public void PrintTiles()
         {
-            //for (int y = Tiles.GetLength(1) - 1; y >= 0; y--)
-            //{
-            //    var row = "";
-            //    for (int x = 0; x < Tiles.GetLength(0); x++)
-            //    {
-            //        {
-            //            var text = Tiles[x, y]?.ToString() ?? " . ";
-            //            row += text + "    ";
-            //        }
-            //    }
-            //    Debug.Log(row);
-            //}
+            for (int y = Tiles.GetLength(1) - 1; y >= 0; y--)
+            {
+                var row = "";
+                for (int x = 0; x < Tiles.GetLength(0); x++)
+                {
+                    {
+                        row += Tiles[x, y] + "    ";
+                    }
+                }
+                Debug.Log(row);
+            }
         }
     }
 }

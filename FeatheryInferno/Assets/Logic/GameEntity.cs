@@ -11,5 +11,10 @@
         {
             return Name.Substring(0, 1);
         }
+
+        public bool IsEmpty()
+        {
+            return Name == Level.EmptyName;
+        }
     }
 }

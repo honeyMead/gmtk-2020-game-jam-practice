@@ -49,19 +49,13 @@ public class GameControl : MonoBehaviour
                 {
                     var entity = level.GetEntity(x, y);
 
-                    if (entity != null)
+                    if (!entity.IsEmpty())
                     {
-                        entityMapping.TryGetValue(entity, out GameObject unityObject);
-
-                        if (entity.IsBurning && unityObject != player)
+                        if (entity.IsBurning && entity.Name != Level.PlayerName)
                         {
                             ShowFlames(entity);
                         }
-
-                        if (entity.Name == Level.PlayerName)
-                        {
-                            MovePlayer(entity);
-                        }
+                        MoveGameObjectOfEntity(entity);
                     }
                 }
             }
@@ -97,11 +91,12 @@ public class GameControl : MonoBehaviour
         return hasMoved;
     }
 
-    private void MovePlayer(GameEntity entity)
+    private void MoveGameObjectOfEntity(GameEntity entity)
     {
         var newX = ConvertIndexToTransformPosition(entity.Position.X);
         var newY = ConvertIndexToTransformPosition(entity.Position.Y);
-        player.transform.position = new Vector2(newX, newY); // TODO animate movement
+        var unityObject = entityMapping[entity];
+        unityObject.transform.position = new Vector2(newX, newY); // TODO animate movement
     }
 
     private void ShowFlames(GameEntity entity)

@@ -17,9 +17,7 @@ namespace Assets.Logic
 
         private readonly GameEntity[,] Tiles;
         private GameEntity player;
-        private readonly IList<GameEntity> chicken = new List<GameEntity>();
-        private readonly IList<GameEntity> strawBales = new List<GameEntity>();
-        private GameEntity exit;
+        //private GameEntity exit;
         private readonly IList<GameEntity> allEntities = new List<GameEntity>();
 
         public Level(int horizontalTiles, int verticalTiles)
@@ -41,23 +39,26 @@ namespace Assets.Logic
             }
         }
 
-        /// <returns>If player has moved.</returns>
-        public bool Next(Position direction)
+        public LevelStepResult Next(Position direction)
         {
-            var hasPlayerMoved = MovePlayer(direction);
-            if (hasPlayerMoved)
+            var result = new LevelStepResult
+            {
+                HasPlayerMoved = MovePlayer(direction)
+            };
+            if (result.HasPlayerMoved)
             {
                 // TODO check if game won: all chickens saved and exit reached
                 InflameEntities();
                 MoveChicken();
-                // TODO remove burned down stuff
+                result.RemovedEntities = RemoveBurnedDownStuff();
                 // TODO check if game lost: a chicken burned
             }
-            return hasPlayerMoved;
+            return result;
         }
 
         private void MoveChicken()
         {
+            var chicken = allEntities.Where(n => n.Name == ChickenName);
             foreach (var chick in chicken)
             {
                 var neighbors = GetNeighborEntities(chick);
@@ -90,16 +91,47 @@ namespace Assets.Logic
             {
                 if (entity.IsFlammable && !entity.IsBurning)
                 {
-                    var neighbors = GetNeighborEntities(entity);
-                    var isNextToFire = neighbors.Any(n => n.IsBurning);
-
-                    if (isNextToFire)
+                    if (IsNextToFire(entity))
                     {
                         entitiesToInflame.Add(entity);
                     }
                 }
             }
             entitiesToInflame.ForEach(a => a.IsBurning = true);
+        }
+
+        private IList<GameEntity> RemoveBurnedDownStuff()
+        {
+            var entitiesToRemove = new List<GameEntity>();
+            foreach (var entity in allEntities)
+            {
+                if (entity.HasMaxRoundsNextToFire)
+                {
+                    if (IsNextToFire(entity))
+                    {
+                        entity.RoundsNextToFire += 1;
+
+                        if (entity.RoundsNextToFire >= entity.MaxRoundsNextToFire)
+                        {
+                            entitiesToRemove.Add(entity);
+                            SetEmptyAtPosition(entity.Position.X, entity.Position.Y);
+                        }
+                    }
+                    else
+                    {
+                        entity.RoundsNextToFire = 0;
+                    }
+                }
+            }
+            entitiesToRemove.ForEach(r => allEntities.Remove(r));
+            return entitiesToRemove;
+        }
+
+        private bool IsNextToFire(GameEntity entity)
+        {
+            var neighbors = GetNeighborEntities(entity);
+            var isNextToFire = neighbors.Any(n => n.IsBurning);
+            return isNextToFire;
         }
 
         private bool MovePlayer(Position direction)
@@ -130,16 +162,18 @@ namespace Assets.Logic
             {
                 case PlayerName:
                     player = gameEntity;
+                    player.IsBurning = true;
                     break;
                 case ChickenName:
-                    chicken.Add(gameEntity);
+                    gameEntity.HasMaxRoundsNextToFire = true;
+                    gameEntity.MaxRoundsNextToFire = 2;
                     break;
                 case StrawBaleName:
-                    strawBales.Add(gameEntity);
+                    gameEntity.IsFlammable = true;
                     break;
-                case ExitName:
-                    exit = gameEntity;
-                    break;
+                    //case ExitName:
+                    //    exit = gameEntity;
+                    //    break;
             }
             // TODO remove previous entities
             allEntities.Add(gameEntity);

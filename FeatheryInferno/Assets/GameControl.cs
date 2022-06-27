@@ -38,57 +38,62 @@ public class GameControl : MonoBehaviour
 
     void Update()
     {
-        // TODO ensure that previous "level.Next" is done
-        var hasMoved = DoNextStep();
+        // TODO ensure that previous "level.Next"/Update is done
+        var stepResult = DoNextStep();
 
-        if (hasMoved)
+        if (stepResult == null || !stepResult.HasPlayerMoved)
         {
-            for (int x = 0; x < level.xSize; x++)
+            return;
+        }
+        for (int x = 0; x < level.xSize; x++)
+        {
+            for (int y = 0; y < level.ySize; y++)
             {
-                for (int y = 0; y < level.ySize; y++)
-                {
-                    var entity = level.GetEntity(x, y);
+                var entity = level.GetEntity(x, y);
 
-                    if (!entity.IsEmpty())
+                if (!entity.IsEmpty())
+                {
+                    if (entity.IsBurning && entity.Name != Level.PlayerName)
                     {
-                        if (entity.IsBurning && entity.Name != Level.PlayerName)
-                        {
-                            ShowFlames(entity);
-                        }
-                        MoveGameObjectOfEntity(entity);
+                        ShowFlames(entity);
                     }
+                    MoveGameObjectOfEntity(entity);
                 }
             }
-            level.PrintTiles();
         }
+        foreach (var removed in stepResult.RemovedEntities)
+        {
+            var unityObject = entityMapping[removed];
+            Destroy(unityObject, 0.1f); // TODO await remove time somehow
+        }
+        level.PrintTiles();
     }
 
-    private bool DoNextStep()
+    private LevelStepResult DoNextStep()
     {
-        var up = Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow);
-        var left = Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow);
-        var down = Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow);
-        var right = Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow);
-        var hasMoved = false;
+        var moveUp = Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow);
+        var moveLeft = Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow);
+        var moveDown = Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow);
+        var moveRight = Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow);
+        LevelStepResult result = null;
 
-        if (up)
+        if (moveUp)
         {
-            hasMoved = level.Next(new Position(0, 1));
+            result = level.Next(new Position(0, 1));
         }
-        else if (left)
+        else if (moveLeft)
         {
-            hasMoved = level.Next(new Position(-1, 0));
+            result = level.Next(new Position(-1, 0));
         }
-        else if (down)
+        else if (moveDown)
         {
-            hasMoved = level.Next(new Position(0, -1));
+            result = level.Next(new Position(0, -1));
         }
-        else if (right)
+        else if (moveRight)
         {
-            hasMoved = level.Next(new Position(1, 0));
+            result = level.Next(new Position(1, 0));
         }
-
-        return hasMoved;
+        return result;
     }
 
     private void MoveGameObjectOfEntity(GameEntity entity)
@@ -121,14 +126,6 @@ public class GameControl : MonoBehaviour
             int xIndex = ConvertTransformPositionToIndex(unityObject.transform.position.x);
             int yIndex = ConvertTransformPositionToIndex(unityObject.transform.position.y);
             var gameEntity = new GameEntity() { Name = unityObject.tag };
-            if (gameEntity.Name == Level.PlayerName)
-            {
-                gameEntity.IsBurning = true;
-            }
-            if (gameEntity.Name == Level.StrawBaleName)
-            {
-                gameEntity.IsFlammable = true;
-            }
             level.PlaceEntity(xIndex, yIndex, gameEntity);
             entityMapping.Add(gameEntity, unityObject);
         }

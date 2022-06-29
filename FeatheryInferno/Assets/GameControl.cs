@@ -19,6 +19,8 @@ public class GameControl : MonoBehaviour
     private GameObject exit;
     private Level level;
 
+    private bool isExecutingStep = false;
+
     private readonly IDictionary<GameEntity, GameObject> entityMapping = new Dictionary<GameEntity, GameObject>();
 
     void Start()
@@ -40,11 +42,15 @@ public class GameControl : MonoBehaviour
 
     void Update()
     {
-        // TODO ensure that previous "level.Next"/Update is done
+        if (isExecutingStep)
+        {
+            return;
+        }
         var direction = GetMoveDirection();
 
         if (direction != null)
         {
+            isExecutingStep = true;
             StartCoroutine(DoLevelStep(direction));
         }
     }
@@ -55,13 +61,13 @@ public class GameControl : MonoBehaviour
 
         foreach (var step in steps)
         {
-            if (!step.HasPlayerMoved)
+            if (step.HasPlayerMoved)
             {
-                yield break;
+                VisualizeLevelChanges(step);
+                yield return new WaitForSeconds(WaitTimeBetweenSteps);
             }
-            VisualizeLevelChanges(step);
-            yield return new WaitForSeconds(WaitTimeBetweenSteps);
         }
+        isExecutingStep = false;
     }
 
     private void VisualizeLevelChanges(LevelStepResult stepResult)
@@ -115,10 +121,10 @@ public class GameControl : MonoBehaviour
 
     private Position GetMoveDirection()
     {
-        var moveUp = Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow);
-        var moveLeft = Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow);
-        var moveDown = Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow);
-        var moveRight = Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow);
+        var moveUp = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
+        var moveLeft = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow);
+        var moveDown = Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow);
+        var moveRight = Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow);
         Position direction = null;
 
         if (moveUp)

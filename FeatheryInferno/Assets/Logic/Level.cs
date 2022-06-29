@@ -39,21 +39,25 @@ namespace Assets.Logic
             }
         }
 
-        public LevelStepResult Next(Position direction)
+        public IEnumerable<LevelStepResult> Next(Position direction)
         {
             var result = new LevelStepResult
             {
                 HasPlayerMoved = MovePlayer(direction)
             };
+            yield return result;
+
             if (result.HasPlayerMoved)
             {
                 // TODO check if game won: all chickens saved and exit reached
                 InflameEntities();
+                yield return result;
                 MoveChicken();
+                yield return result;
                 result.RemovedEntities = RemoveBurnedDownStuff();
+                yield return result;
                 // TODO check if game lost: a chicken burned
             }
-            return result;
         }
 
         private void MoveChicken()

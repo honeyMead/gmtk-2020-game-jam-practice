@@ -1,4 +1,5 @@
 using Assets.Logic;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -10,6 +11,7 @@ public class GameControl : MonoBehaviour
     public int VerticalTiles;
     public GameObject firePrefab;
 
+    private const float WaitTimeBetweenSteps = 0.1f;
     private GameObject player;
     private GameObject[] chicken;
     private GameObject[] strawBales;
@@ -39,12 +41,31 @@ public class GameControl : MonoBehaviour
     void Update()
     {
         // TODO ensure that previous "level.Next"/Update is done
-        var stepResult = DoNextStep();
+        var direction = GetMoveDirection();
 
-        if (stepResult == null || !stepResult.HasPlayerMoved)
+        if (direction != null)
         {
-            return;
+            StartCoroutine(DoLevelStep(direction));
         }
+    }
+
+    private IEnumerator DoLevelStep(Position direction)
+    {
+        var steps = level.Next(direction);
+
+        foreach (var step in steps)
+        {
+            if (!step.HasPlayerMoved)
+            {
+                yield break;
+            }
+            VisualizeLevelChanges(step);
+            yield return new WaitForSeconds(WaitTimeBetweenSteps);
+        }
+    }
+
+    private void VisualizeLevelChanges(LevelStepResult stepResult)
+    {
         for (int x = 0; x < level.xSize; x++)
         {
             for (int y = 0; y < level.ySize; y++)
@@ -71,7 +92,7 @@ public class GameControl : MonoBehaviour
         foreach (var removed in stepResult.RemovedEntities)
         {
             var unityObject = entityMapping[removed];
-            Destroy(unityObject, 0.1f); // TODO await remove time somehow
+            Destroy(unityObject);
         }
     }
 
@@ -92,31 +113,31 @@ public class GameControl : MonoBehaviour
         }
     }
 
-    private LevelStepResult DoNextStep()
+    private Position GetMoveDirection()
     {
         var moveUp = Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow);
         var moveLeft = Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow);
         var moveDown = Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow);
         var moveRight = Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow);
-        LevelStepResult result = null;
+        Position direction = null;
 
         if (moveUp)
         {
-            result = level.Next(new Position(0, 1));
+            direction = new Position(0, 1);
         }
         else if (moveLeft)
         {
-            result = level.Next(new Position(-1, 0));
+            direction = new Position(-1, 0);
         }
         else if (moveDown)
         {
-            result = level.Next(new Position(0, -1));
+            direction = new Position(0, -1);
         }
         else if (moveRight)
         {
-            result = level.Next(new Position(1, 0));
+            direction = new Position(1, 0);
         }
-        return result;
+        return direction;
     }
 
     private void MoveGameObjectOfEntity(GameEntity entity)

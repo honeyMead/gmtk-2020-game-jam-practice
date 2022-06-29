@@ -41,27 +41,31 @@ namespace Assets.Logic
 
         public IEnumerable<LevelStepResult> Next(Position direction)
         {
+            var hasPlayerMoved = MovePlayer(direction);
             var result = new LevelStepResult
             {
-                HasPlayerMoved = MovePlayer(direction)
+                HasPlayerMoved = hasPlayerMoved,
+                HasSomethingChanged = hasPlayerMoved,
             };
             yield return result;
 
             if (result.HasPlayerMoved)
             {
                 // TODO check if game won: all chickens saved and exit reached
-                InflameEntities();
+                result.HasSomethingChanged = InflameEntities();
                 yield return result;
-                MoveChicken();
+                result.HasSomethingChanged = MoveChicken();
                 yield return result;
                 result.RemovedEntities = RemoveBurnedDownStuff();
+                result.HasSomethingChanged = result.RemovedEntities.Count() > 0;
                 yield return result;
                 // TODO check if game lost: a chicken burned
             }
         }
 
-        private void MoveChicken()
+        private bool MoveChicken()
         {
+            var hasAChickenMoved = false;
             var chicken = allEntities.Where(n => n.Name == ChickenName);
             foreach (var chick in chicken)
             {
@@ -84,11 +88,13 @@ namespace Assets.Logic
                         }
                     }
                     MoveEntityToPosition(chick, bestPosition);
+                    hasAChickenMoved = true;
                 }
             }
+            return hasAChickenMoved;
         }
 
-        private void InflameEntities()
+        private bool InflameEntities()
         {
             var entitiesToInflame = new List<GameEntity>();
             foreach (var entity in allEntities)
@@ -102,6 +108,7 @@ namespace Assets.Logic
                 }
             }
             entitiesToInflame.ForEach(a => a.IsBurning = true);
+            return entitiesToInflame.Count() > 0;
         }
 
         private IList<GameEntity> RemoveBurnedDownStuff()
@@ -179,7 +186,11 @@ namespace Assets.Logic
                     //    exit = gameEntity;
                     //    break;
             }
-            // TODO remove previous entities
+            var prevEntity = allEntities.FirstOrDefault(n => n.Position.X == xIndex && n.Position.Y == yIndex);
+            if (prevEntity != null)
+            {
+                allEntities.Remove(prevEntity);
+            }
             allEntities.Add(gameEntity);
 
             gameEntity.Position.X = xIndex;

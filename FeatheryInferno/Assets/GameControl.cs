@@ -61,16 +61,16 @@ public class GameControl : MonoBehaviour
 
         foreach (var step in steps)
         {
-            if (step.HasPlayerMoved)
+            if (step.HasPlayerMoved && step.HasSomethingChanged)
             {
-                VisualizeLevelChanges(step);
+                yield return VisualizeLevelChanges(step);
                 yield return new WaitForSeconds(WaitTimeBetweenSteps);
             }
         }
         isExecutingStep = false;
     }
 
-    private void VisualizeLevelChanges(LevelStepResult stepResult)
+    private IEnumerator VisualizeLevelChanges(LevelStepResult stepResult)
     {
         for (int x = 0; x < level.xSize; x++)
         {
@@ -84,7 +84,7 @@ public class GameControl : MonoBehaviour
                     {
                         ShowFlames(entity);
                     }
-                    MoveGameObjectOfEntity(entity);
+                    yield return MoveGameObjectOfEntity(entity);
                     ChangeChickenColor(entity);
                 }
             }
@@ -98,7 +98,7 @@ public class GameControl : MonoBehaviour
         foreach (var removed in stepResult.RemovedEntities)
         {
             var unityObject = entityMapping[removed];
-            Destroy(unityObject);
+            Destroy(unityObject, 0.05f);
         }
     }
 
@@ -146,12 +146,23 @@ public class GameControl : MonoBehaviour
         return direction;
     }
 
-    private void MoveGameObjectOfEntity(GameEntity entity)
+    private IEnumerator MoveGameObjectOfEntity(GameEntity entity)
     {
         var newX = ConvertIndexToTransformPosition(entity.Position.X);
         var newY = ConvertIndexToTransformPosition(entity.Position.Y);
         var unityObject = entityMapping[entity];
-        unityObject.transform.position = new Vector2(newX, newY); // TODO animate movement
+        var currentPos = unityObject.transform.position;
+
+        if (currentPos.x == newX && currentPos.y == newY)
+        {
+            yield break;
+        }
+
+        var x = (currentPos.x + newX) / 2;
+        var y = (currentPos.y + newY) / 2;
+        unityObject.transform.position = new Vector2(x, y);
+        yield return new WaitForSeconds(0.025f);
+        unityObject.transform.position = new Vector2(newX, newY);
     }
 
     private void ShowFlames(GameEntity entity)
@@ -186,7 +197,7 @@ public class GameControl : MonoBehaviour
         return (int)(position / TileSize);
     }
 
-    private int ConvertIndexToTransformPosition(int index)
+    private float ConvertIndexToTransformPosition(int index)
     {
         return index * TileSize;
     }

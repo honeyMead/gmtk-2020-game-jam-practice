@@ -58,15 +58,38 @@ public class GameControl : MonoBehaviour
                         ShowFlames(entity);
                     }
                     MoveGameObjectOfEntity(entity);
+                    ChangeChickenColor(entity);
                 }
             }
         }
+        RemoveGameObjects(stepResult);
+        level.PrintTiles();
+    }
+
+    private void RemoveGameObjects(LevelStepResult stepResult)
+    {
         foreach (var removed in stepResult.RemovedEntities)
         {
             var unityObject = entityMapping[removed];
             Destroy(unityObject, 0.1f); // TODO await remove time somehow
         }
-        level.PrintTiles();
+    }
+
+    private void ChangeChickenColor(GameEntity entity)
+    {
+        if (entity.Name == Level.ChickenName)
+        {
+            var chicken = entityMapping[entity];
+            var sprite = chicken.GetComponentInChildren<SpriteRenderer>();
+            if (entity.RoundsNextToFire >= 1)
+            {
+                sprite.color = new Color(1, 0.78f, 0.63f);
+            }
+            else
+            {
+                sprite.color = Color.white;
+            }
+        }
     }
 
     private LevelStepResult DoNextStep()

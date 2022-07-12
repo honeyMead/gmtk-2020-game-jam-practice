@@ -45,23 +45,19 @@ namespace Assets.Logic
             {
                 HasPlayerMoved = hasPlayerMoved,
                 HasSomethingChanged = hasPlayerMoved,
+                IsGameWon = IsGameWon(),
             };
             yield return result;
 
-            if (result.HasPlayerMoved)
+            if (result.HasPlayerMoved && !result.IsGameWon)
             {
-                // TODO check if game won: all chickens saved and exit reached
                 result.HasSomethingChanged = InflameEntities();
                 yield return result;
                 result.HasSomethingChanged = MoveChicken();
                 yield return result;
-
                 var fledChicken = RemoveFledChicken();
                 var burnedDownStuff = RemoveBurnedDownStuff();
-                if (burnedDownStuff.Any(r => r.Name == ChickenName))
-                {
-                    result.IsGameLost = true;
-                }
+                result.IsGameLost = IsGameLost(burnedDownStuff);
                 result.RemovedEntities = burnedDownStuff.Concat(fledChicken);
                 result.HasSomethingChanged = result.RemovedEntities.Count() > 0;
                 yield return result;
@@ -71,7 +67,7 @@ namespace Assets.Logic
         private bool MoveChicken()
         {
             var hasAChickenMoved = false;
-            var chicken = allEntities.Where(n => n.Name == ChickenName);
+            var chicken = GetAllChicken();
 
             foreach (var chick in chicken)
             {
@@ -155,7 +151,7 @@ namespace Assets.Logic
         private IList<GameEntity> RemoveFledChicken()
         {
             var entitiesToRemove = new List<GameEntity>();
-            var chicken = allEntities.Where(n => n.Name == ChickenName);
+            var chicken = GetAllChicken();
 
             foreach (var chick in chicken)
             {
@@ -168,6 +164,11 @@ namespace Assets.Logic
             }
             entitiesToRemove.ForEach(r => allEntities.Remove(r));
             return entitiesToRemove;
+        }
+
+        private IEnumerable<GameEntity> GetAllChicken()
+        {
+            return allEntities.Where(n => n.Name == ChickenName);
         }
 
         private bool IsNextToFire(GameEntity entity)
@@ -262,6 +263,28 @@ namespace Assets.Logic
                 }
             }
             return neighborEntities;
+        }
+
+        private static bool IsGameLost(IList<GameEntity> burnedDownStuff)
+        {
+            if (burnedDownStuff.Any(r => r.Name == ChickenName))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private bool IsGameWon()
+        {
+            if (player.Position.Equals(exitPosition))
+            {
+                var chicken = GetAllChicken();
+                if (chicken.Count() == 0)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         private void SetEntity(int xIndex, int yIndex, GameEntity gameEntity)

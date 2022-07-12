@@ -158,10 +158,26 @@ public class GameControl : MonoBehaviour
             yield break;
         }
 
-        var x = (currentPos.x + newX) / 2;
-        var y = (currentPos.y + newY) / 2;
-        unityObject.transform.position = new Vector2(x, y);
-        yield return new WaitForSeconds(0.025f);
+        var timeForAnimation = 0.05f;
+        var animationSteps = 4f;
+        var timeForStep = timeForAnimation / animationSteps;
+
+        for (int i = 1; i < animationSteps; i++)
+        {
+            var x = currentPos.x;
+            var y = currentPos.y;
+
+            if (currentPos.x != newX)
+            {
+                x = currentPos.x + (newX - currentPos.x) * (i / animationSteps);
+            }
+            if (currentPos.y != newY)
+            {
+                y = currentPos.y + (newY - currentPos.y) * (i / animationSteps);
+            }
+            unityObject.transform.position = new Vector2(x, y);
+            yield return new WaitForSeconds(timeForStep);
+        }
         unityObject.transform.position = new Vector2(newX, newY);
     }
 

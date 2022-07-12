@@ -1,4 +1,5 @@
 using Assets.Logic;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,15 +30,22 @@ public class GameControl : MonoBehaviour
         chicken = GameObject.FindGameObjectsWithTag(Level.ChickenName);
         strawBales = GameObject.FindGameObjectsWithTag(Level.StrawBaleName);
         fires = new List<GameObject>();
-        exit = GameObject.FindWithTag(Level.ExitName);
+        exit = GameObject.FindWithTag("Exit");
 
         level = new Level(HorizontalTiles, VerticalTiles);
         PlaceEntities(player);
         PlaceEntities(chicken);
         PlaceEntities(strawBales);
-        PlaceEntities(exit);
+        SetExitPosition();
 
         level.PrintTiles();
+    }
+
+    private void SetExitPosition()
+    {
+        int x = ConvertTransformPositionToIndex(exit.transform.position.x);
+        int y = ConvertTransformPositionToIndex(exit.transform.position.y);
+        level.SetExitPosition(x, y);
     }
 
     void Update()
@@ -72,6 +80,7 @@ public class GameControl : MonoBehaviour
 
     private IEnumerator VisualizeLevelChanges(LevelStepResult stepResult)
     {
+        level.PrintTiles();
         for (int x = 0; x < level.xSize; x++)
         {
             for (int y = 0; y < level.ySize; y++)
@@ -90,7 +99,6 @@ public class GameControl : MonoBehaviour
             }
         }
         RemoveGameObjects(stepResult);
-        level.PrintTiles();
     }
 
     private void RemoveGameObjects(LevelStepResult stepResult)

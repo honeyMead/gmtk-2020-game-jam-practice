@@ -10,14 +10,13 @@ namespace Assets.Logic
         public const string ChickenName = "Chicken";
         public const string StrawBaleName = "StrawBale";
         public const string EmptyName = "_Empty";
-        public const string ExitName = "Exit";
 
         public readonly int xSize;
         public readonly int ySize;
 
         private readonly GameEntity[,] Tiles;
         private GameEntity player;
-        //private GameEntity exit;
+        private Position exitPosition;
         private readonly IList<GameEntity> allEntities = new List<GameEntity>();
 
         public Level(int horizontalTiles, int verticalTiles)
@@ -56,10 +55,16 @@ namespace Assets.Logic
                 yield return result;
                 result.HasSomethingChanged = MoveChicken();
                 yield return result;
-                result.RemovedEntities = RemoveBurnedDownStuff();
+
+                var fledChicken = RemoveFledChicken();
+                var burnedDownStuff = RemoveBurnedDownStuff();
+                if (burnedDownStuff.Any(r => r.Name == ChickenName))
+                {
+                    result.IsGameLost = true;
+                }
+                result.RemovedEntities = burnedDownStuff.Concat(fledChicken);
                 result.HasSomethingChanged = result.RemovedEntities.Count() > 0;
                 yield return result;
-                // TODO check if game lost: a chicken burned
             }
         }
 
@@ -67,6 +72,7 @@ namespace Assets.Logic
         {
             var hasAChickenMoved = false;
             var chicken = allEntities.Where(n => n.Name == ChickenName);
+
             foreach (var chick in chicken)
             {
                 var neighbors = GetNeighborEntities(chick);
@@ -77,14 +83,22 @@ namespace Assets.Logic
                 {
                     var bestPosition = emptyNeighbors.First().Position;
 
-                    foreach (var emptyNeighbor in emptyNeighbors)
+                    var isNextToExit = emptyNeighbors.Any(entity => entity.Position.Equals(exitPosition));
+                    if (isNextToExit)
                     {
-                        var nextNeighbors = GetNeighborEntities(emptyNeighbor);
-                        var hasNoBurningNeighbors = nextNeighbors.All(n => !n.IsBurning);
-                        if (hasNoBurningNeighbors)
+                        bestPosition = exitPosition;
+                    }
+                    else
+                    {
+                        foreach (var emptyNeighbor in emptyNeighbors)
                         {
-                            bestPosition = emptyNeighbor.Position;
-                            break;
+                            var nextNeighbors = GetNeighborEntities(emptyNeighbor);
+                            var hasNoBurningNeighbors = nextNeighbors.All(n => !n.IsBurning);
+                            if (hasNoBurningNeighbors)
+                            {
+                                bestPosition = emptyNeighbor.Position;
+                                break;
+                            }
                         }
                     }
                     MoveEntityToPosition(chick, bestPosition);
@@ -125,13 +139,31 @@ namespace Assets.Logic
                         if (entity.RoundsNextToFire >= entity.MaxRoundsNextToFire)
                         {
                             entitiesToRemove.Add(entity);
-                            SetEmptyAtPosition(entity.Position.X, entity.Position.Y);
+                            SetEmptyAtPosition(entity.Position);
                         }
                     }
                     else
                     {
                         entity.RoundsNextToFire = 0;
                     }
+                }
+            }
+            entitiesToRemove.ForEach(r => allEntities.Remove(r));
+            return entitiesToRemove;
+        }
+
+        private IList<GameEntity> RemoveFledChicken()
+        {
+            var entitiesToRemove = new List<GameEntity>();
+            var chicken = allEntities.Where(n => n.Name == ChickenName);
+
+            foreach (var chick in chicken)
+            {
+                if (chick.Position.Equals(exitPosition))
+                {
+                    entitiesToRemove.Add(chick);
+                    chick.IsBurning = false;
+                    SetEmptyAtPosition(chick.Position);
                 }
             }
             entitiesToRemove.ForEach(r => allEntities.Remove(r));
@@ -182,9 +214,6 @@ namespace Assets.Logic
                 case StrawBaleName:
                     gameEntity.IsFlammable = true;
                     break;
-                    //case ExitName:
-                    //    exit = gameEntity;
-                    //    break;
             }
             var prevEntity = allEntities.FirstOrDefault(n => n.Position.X == xIndex && n.Position.Y == yIndex);
             if (prevEntity != null)
@@ -199,9 +228,14 @@ namespace Assets.Logic
             SetEntity(xIndex, yIndex, gameEntity);
         }
 
+        public void SetExitPosition(int x, int y)
+        {
+            exitPosition = new Position(x, y);
+        }
+
         private void MoveEntityToPosition(GameEntity entity, Position target)
         {
-            SetEmptyAtPosition(entity.Position.X, entity.Position.Y);
+            SetEmptyAtPosition(entity.Position);
             entity.Position = target;
             SetEntity(target.X, target.Y, entity);
         }
@@ -241,6 +275,11 @@ namespace Assets.Logic
                 && target.X <= Tiles.GetUpperBound(0) && target.Y <= Tiles.GetUpperBound(1);
         }
 
+        private void SetEmptyAtPosition(Position pos)
+        {
+            SetEmptyAtPosition(pos.X, pos.Y);
+        }
+
         private void SetEmptyAtPosition(int x, int y)
         {
             SetEntity(x, y, new GameEntity()
@@ -258,11 +297,18 @@ namespace Assets.Logic
                 for (int x = 0; x < Tiles.GetLength(0); x++)
                 {
                     {
-                        row += Tiles[x, y] + "    ";
+                        var entity = Tiles[x, y];
+                        var entityText = entity.ToString();
+                        if (entity.IsEmpty() && x == exitPosition.X && y == exitPosition.Y)
+                        {
+                            entityText = "X";
+                        }
+                        row += entityText + "    ";
                     }
                 }
                 Debug.Log(row);
             }
+            Debug.Log("------------------");
         }
     }
 }
